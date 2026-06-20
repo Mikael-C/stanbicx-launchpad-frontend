@@ -170,6 +170,56 @@ module.exports = function (prisma) {
   });
 
   /**
+   * POST /api/admin/proposals/:id/reject
+   * body: { wallet }
+   * Reject a pending proposal
+   */
+  router.post('/proposals/:id/reject', authMiddleware, adminMiddleware, async (req, res) => {
+    try {
+      const { id } = req.params;
+      const { wallet } = req.body;
+
+      const proposal = await prisma.proposal.findUnique({
+        where: { id },
+      });
+
+      if (!proposal) {
+        return res.status(404).json({ error: 'Proposal not found' });
+      }
+      if (proposal.status !== 'pending') {
+        return res.status(400).json({ error: `Proposal is already ${proposal.status}` });
+      }
+
+      await prisma.proposal.update({
+        where: { id },
+        data: {
+          status: 'rejected',
+        },
+      });
+
+      // Log admin action
+      await prisma.adminAction.create({
+        data: {
+          wallet: wallet.toLowerCase(),
+          action: 'reject_proposal',
+          description: `Rejected proposal: ${proposal.description}`,
+          metadata: JSON.stringify({ proposalId: id }),
+        },
+      });
+
+      logger.info('Proposal rejected', { wallet, proposalId: id });
+
+      res.json({
+        success: true,
+        status: 'rejected',
+      });
+    } catch (err) {
+      logger.error('Reject proposal error', { error: err.message });
+      res.status(500).json({ error: 'Failed to reject proposal' });
+    }
+  });
+
+  /**
    * GET /api/admin/kill-switch/status
    * Returns current kill switch state
    */
