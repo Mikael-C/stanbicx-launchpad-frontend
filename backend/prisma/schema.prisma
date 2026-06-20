@@ -1,0 +1,336 @@
+// SX Launchpad Ecosystem - Prisma Schema
+// SQLite for development, switch provider for production
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+// ─── Blockchain Event Indexer ────────────────────────────────────────
+
+model Event {
+  id              String   @id @default(uuid())
+  chainId         Int
+  contractAddress String
+  eventName       String
+  blockNumber     Int
+  transactionHash String
+  logIndex        Int
+  eventData       String   // JSON string (SQLite has no native Json)
+  blockTimestamp   DateTime
+  processedAt     DateTime @default(now())
+
+  @@unique([chainId, transactionHash, logIndex])
+  @@index([chainId, eventName])
+  @@index([chainId, blockNumber])
+  @@index([contractAddress])
+  @@index([transactionHash])
+  @@map("events")
+}
+
+model SyncStatus {
+  id               String   @id @default(uuid())
+  chainId          Int      @unique
+  lastIndexedBlock Int      @default(0)
+  lastSyncTime     DateTime @default(now())
+  isReorging       Boolean  @default(false)
+  reorgDepth       Int      @default(0)
+
+  @@map("sync_status")
+}
+
+model ReorgLog {
+  id             String   @id @default(uuid())
+  chainId        Int
+  detectedAt     DateTime @default(now())
+  fromBlock      Int
+  toBlock        Int
+  blocksRemoved  Int
+  eventsRemoved  Int
+  resolvedAt     DateTime?
+
+  @@index([chainId])
+  @@map("reorg_log")
+}
+
+model IndexingError {
+  id          String   @id @default(uuid())
+  chainId     Int
+  blockNumber Int?
+  errorType   String
+  message     String
+  stackTrace  String?
+  retryCount  Int      @default(0)
+  resolvedAt  DateTime?
+  createdAt   DateTime @default(now())
+
+  @@index([chainId, errorType])
+  @@map("indexing_errors")
+}
+
+// ─── User Accounts ──────────────────────────────────────────────────
+
+model User {
+  id              String    @id @default(uuid())
+  walletAddress   String    @unique
+  sxId            String    @unique
+  sxuaBalance     Float     @default(0)
+  sxpBalance      Float     @default(0)
+  totalDeposited  Float     @default(0)
+  totalWithdrawn  Float     @default(0)
+  isRegistered    Boolean   @default(true)
+  isLocked        Boolean   @default(false)
+  lockExpiresAt   DateTime?
+  deviceHash      String?
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+
+  subAccounts       CommittedSubAccount[]
+  transactions      Transaction[]
+  launchpadPurchases LaunchpadPurchase[]
+  resellingListings  ResellingListing[]
+  referralsMade      Referral[]           @relation("ReferrerRelation")
+  referralsReceived  Referral[]           @relation("ReferredRelation")
+  jailbreakAttempts  JailbreakAttempt[]
+
+  @@index([walletAddress])
+  @@map("users")
+}
+
+model CommittedSubAccount {
+  id                  String    @id @default(uuid())
+  userId              String
+  subAccountId        Int
+  principal           Float     @default(0)
+  yieldAccrued        Float     @default(0)
+  creationTimestamp   DateTime  @default(now())
+  maturityTimestamp   DateTime
+  status              String    @default("active")
+  withdrawnAt         DateTime?
+
+  user User @relation(fields: [userId], references: [id])
+
+  @@unique([userId, subAccountId])
+  @@index([userId])
+  @@index([status])
+  @@map("committed_sub_accounts")
+}
+
+// ─── Transactions ───────────────────────────────────────────────────
+
+model Transaction {
+  id              String   @id @default(uuid())
+  userId          String
+  type            String   // deposit, withdraw, buy_stables, purchase, claim, list, buy_listing
+  amount          Float
+  feeAmount       Float    @default(0)
+  netAmount       Float    @default(0)
+  token           String   @default("SXUA")
+  transactionHash String?
+  status          String   @default("pending") // pending, confirmed, failed
+  metadata        String?  // JSON string for extra data
+  createdAt       DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id])
+
+  @@index([userId])
+  @@index([type])
+  @@index([transactionHash])
+  @@index([createdAt])
+  @@map("transactions")
+}
+
+// ─── Launchpad ──────────────────────────────────────────────────────
+
+model LaunchpadProject {
+  id              String   @id @default(uuid())
+  name            String
+  symbol          String
+  description     String
+  tokenPrice      Float
+  totalSupply     Float
+  availableSupply Float
+  startDate       DateTime
+  endDate         DateTime
+  vestingDuration Int      @default(150) // days
+  cliffDuration   Int      @default(30)  // days
+  status          String   @default("upcoming") // upcoming, active, completed, cancelled
+  contractAddress String?
+  logoUrl         String?
+  websiteUrl      String?
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  purchases LaunchpadPurchase[]
+
+  @@index([status])
+  @@map("launchpad_projects")
+}
+
+model LaunchpadPurchase {
+  id                String   @id @default(uuid())
+  userId            String
+  projectId         String
+  amount            Float
+  tokenAmount       Float
+  purchasePrice     Float
+  transactionHash   String?
+  vestingStartDate  DateTime @default(now())
+  vestingEndDate    DateTime
+  cliffEndDate      DateTime
+  totalClaimed      Float    @default(0)
+  status            String   @default("active") // active, completed, early_exit
+  createdAt         DateTime @default(now())
+
+  user    User             @relation(fields: [userId], references: [id])
+  project LaunchpadProject @relation(fields: [projectId], references: [id])
+  claims  VestingClaim[]
+
+  @@index([userId])
+  @@index([projectId])
+  @@index([status])
+  @@map("launchpad_purchases")
+}
+
+model VestingClaim {
+  id              String   @id @default(uuid())
+  purchaseId      String
+  amount          Float
+  transactionHash String?
+  claimType       String   @default("vested") // vested, early_exit
+  createdAt       DateTime @default(now())
+
+  purchase LaunchpadPurchase @relation(fields: [purchaseId], references: [id])
+
+  @@index([purchaseId])
+  @@map("vesting_claims")
+}
+
+// ─── Marketplace (Reselling) ────────────────────────────────────────
+
+model ResellingListing {
+  id              String    @id @default(uuid())
+  sellerId        String
+  amount          Float
+  pricePerToken   Float
+  totalPrice      Float
+  status          String    @default("active") // active, sold, cancelled
+  buyerId         String?
+  transactionHash String?
+  listedAt        DateTime  @default(now())
+  soldAt          DateTime?
+  cancelledAt     DateTime?
+
+  seller User @relation(fields: [sellerId], references: [id])
+
+  @@index([status])
+  @@index([sellerId])
+  @@map("reselling_listings")
+}
+
+// ─── Referrals ──────────────────────────────────────────────────────
+
+model Referral {
+  id             String   @id @default(uuid())
+  referrerId     String
+  referredId     String
+  referralCode   String
+  status         String   @default("pending") // pending, successful
+  rewardAmount   Float    @default(0)
+  rewardPaid     Boolean  @default(false)
+  createdAt      DateTime @default(now())
+  completedAt    DateTime?
+
+  referrer User @relation("ReferrerRelation", fields: [referrerId], references: [id])
+  referred User @relation("ReferredRelation", fields: [referredId], references: [id])
+
+  @@index([referrerId])
+  @@index([referredId])
+  @@index([referralCode])
+  @@map("referrals")
+}
+
+model LeaderboardCache {
+  id        String   @id @default(uuid())
+  wallet    String
+  rank      Int
+  count     Int      @default(0)
+  volume    Float    @default(0)
+  updatedAt DateTime @updatedAt
+
+  @@unique([wallet])
+  @@index([rank])
+  @@map("leaderboard_cache")
+}
+
+// ─── Admin & Governance ─────────────────────────────────────────────
+
+model AdminAction {
+  id          String   @id @default(uuid())
+  wallet      String
+  action      String
+  description String?
+  metadata    String?  // JSON
+  createdAt   DateTime @default(now())
+
+  @@index([wallet])
+  @@index([action])
+  @@index([createdAt])
+  @@map("admin_actions")
+}
+
+model Proposal {
+  id           String   @id @default(uuid())
+  proposer     String
+  description  String
+  calldata     String?
+  approvals    String   @default("[]") // JSON array of wallet addresses
+  approvalCount Int     @default(0)
+  requiredApprovals Int @default(3)
+  status       String   @default("pending") // pending, approved, executed, rejected
+  executedAt   DateTime?
+  createdAt    DateTime @default(now())
+
+  @@index([status])
+  @@map("proposals")
+}
+
+// ─── Security ───────────────────────────────────────────────────────
+
+model JailbreakAttempt {
+  id            String   @id @default(uuid())
+  userId        String?
+  walletAddress String
+  message       String
+  patternMatched String
+  ipAddress     String?
+  blocked       Boolean  @default(true)
+  createdAt     DateTime @default(now())
+
+  user User? @relation(fields: [userId], references: [id])
+
+  @@index([walletAddress])
+  @@index([createdAt])
+  @@map("jailbreak_attempts")
+}
+
+// ─── Formal Verification ────────────────────────────────────────────
+
+model VerificationResult {
+  id                 String   @id @default(uuid())
+  contractName       String   @unique
+  status             String   @default("pending") // passed, failed, pending, running
+  propertiesVerified Int      @default(0)
+  propertiesTotal    Int      @default(0)
+  rulesResults       String?  // JSON string of per-rule results
+  lastVerified       DateTime?
+  verifiedBy         String   @default("system")
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
+
+  @@map("verification_results")
+}
