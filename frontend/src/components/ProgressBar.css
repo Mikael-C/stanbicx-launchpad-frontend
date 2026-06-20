@@ -1,0 +1,11 @@
+.progress-fill-green {
+  background: var(--gradient-success);
+}
+
+.progress-fill-red {
+  background: var(--gradient-danger);
+}
+
+.progress-fill-cyan {
+  background: var(--gradient-secondary);
+}

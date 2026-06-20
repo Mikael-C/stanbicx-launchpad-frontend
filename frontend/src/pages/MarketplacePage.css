@@ -1,0 +1,106 @@
+.marketplace-page .orderbook {
+  margin-bottom: var(--space-xl);
+}
+
+.marketplace-warning {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  padding: var(--space-md) var(--space-lg) !important;
+  background: rgba(253, 203, 110, 0.08) !important;
+  border-color: rgba(253, 203, 110, 0.2) !important;
+  color: var(--accent-orange);
+  font-size: var(--font-sm);
+}
+
+/* SXP Balance Card */
+.sxp-balance-card {
+  padding: var(--space-lg) !important;
+}
+
+.sxp-balance-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-lg);
+}
+
+.sxp-balance-label {
+  font-size: var(--font-sm);
+  margin-bottom: 4px;
+}
+
+.sxp-balance-value {
+  font-size: var(--font-2xl);
+  font-weight: var(--weight-extrabold);
+  color: var(--text-primary);
+}
+
+/* Trade Result Banner */
+.trade-result-banner {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  padding: var(--space-md) var(--space-lg) !important;
+  background: rgba(16, 185, 129, 0.08) !important;
+  border-color: rgba(16, 185, 129, 0.25) !important;
+  animation: slideDown 0.3s ease-out;
+}
+
+.trade-result-icon {
+  font-size: var(--font-xl);
+  flex-shrink: 0;
+}
+
+.trade-result-info {
+  flex: 1;
+}
+
+.trade-result-title {
+  font-weight: var(--weight-bold);
+  color: var(--color-success);
+  font-size: var(--font-sm);
+}
+
+.trade-result-detail {
+  font-size: var(--font-xs);
+  color: var(--text-secondary);
+  margin-top: 2px;
+}
+
+.trade-result-balance {
+  color: var(--text-muted);
+}
+
+.trade-result-balance strong {
+  color: var(--color-success);
+}
+
+/* List Summary */
+.list-summary .mb-sm {
+  margin-bottom: var(--space-xs);
+}
+
+/* Tab badge */
+.tab-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 20px;
+  height: 20px;
+  padding: 0 6px;
+  border-radius: 999px;
+  background: var(--gradient-primary);
+  color: white;
+  font-size: 11px;
+  font-weight: var(--weight-bold);
+  margin-left: 6px;
+}
+
+/* Form hint */
+.form-hint {
+  display: block;
+  font-size: var(--font-xs);
+  color: var(--text-muted);
+  margin-top: 4px;
+}

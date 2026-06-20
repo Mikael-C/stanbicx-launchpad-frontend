@@ -1,0 +1,28 @@
+.jailbreak-pattern {
+  font-family: monospace;
+  font-size: var(--font-xs);
+  padding: 4px 8px;
+  background: rgba(255, 107, 107, 0.1);
+  border-radius: var(--radius-sm);
+  color: var(--accent-red);
+}
+
+.blocked-patterns {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.blocked-pattern-item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: var(--space-sm) var(--space-md);
+  border-radius: var(--radius-sm);
+  font-size: var(--font-sm);
+  transition: background var(--transition-fast);
+}
+
+.blocked-pattern-item:hover {
+  background: rgba(255, 107, 107, 0.05);
+}

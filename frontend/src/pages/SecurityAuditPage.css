@@ -1,0 +1,437 @@
+/* ============================================
+   SECURITY AUDIT PAGE STYLES
+   AI-Powered Vulnerability Scanner
+   ============================================ */
+
+/* ─── Control Bar ─────────────────────────────────────────── */
+.audit-control-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-lg) var(--space-xl) !important;
+  margin-bottom: var(--space-lg);
+}
+
+.audit-control-info {
+  display: flex;
+  gap: var(--space-xl);
+}
+
+.audit-control-stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.audit-control-value {
+  font-size: var(--font-2xl);
+  font-weight: var(--weight-bold);
+  color: var(--text-primary);
+}
+
+.audit-control-label {
+  font-size: var(--font-xs);
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* ─── Progress Bar ────────────────────────────────────────── */
+.audit-progress {
+  padding: var(--space-lg) var(--space-xl) !important;
+  margin-bottom: var(--space-lg);
+}
+
+.audit-progress-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--space-sm);
+}
+
+.audit-progress-label {
+  font-size: var(--font-sm);
+  color: var(--text-secondary);
+}
+
+.audit-progress-pct {
+  font-size: var(--font-sm);
+  font-weight: var(--weight-bold);
+  color: var(--accent-blue);
+}
+
+.audit-progress-bar {
+  width: 100%;
+  height: 6px;
+  background: rgba(102, 126, 234, 0.1);
+  border-radius: var(--radius-full);
+  overflow: hidden;
+}
+
+.audit-progress-fill {
+  height: 100%;
+  background: var(--gradient-primary);
+  border-radius: var(--radius-full);
+  transition: width 0.3s ease;
+}
+
+/* ─── Terminal ────────────────────────────────────────────── */
+.audit-terminal {
+  margin-bottom: var(--space-lg);
+  overflow: hidden;
+}
+
+.audit-terminal-header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  padding: 10px var(--space-lg);
+  background: rgba(10, 14, 39, 0.8);
+  border-bottom: 1px solid var(--glass-border);
+}
+
+.audit-terminal-dots {
+  display: flex;
+  gap: 6px;
+}
+
+.dot-red, .dot-yellow, .dot-green {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+.dot-red { background: #ff5f57; }
+.dot-yellow { background: #ffbd2e; }
+.dot-green { background: #28c840; }
+
+.audit-terminal-title {
+  font-size: var(--font-xs);
+  color: var(--text-muted);
+  font-family: monospace;
+}
+
+.audit-terminal-body {
+  max-height: 280px;
+  overflow-y: auto;
+  padding: var(--space-md) var(--space-lg);
+  background: rgba(5, 8, 22, 0.9);
+  font-family: 'Fira Code', 'Cascadia Code', 'Consolas', monospace;
+  font-size: 12px;
+  line-height: 1.8;
+}
+
+.audit-log-line {
+  display: flex;
+  gap: var(--space-md);
+  white-space: pre-wrap;
+}
+
+.audit-log-ts {
+  color: rgba(102, 126, 234, 0.5);
+  flex-shrink: 0;
+  min-width: 70px;
+}
+
+.audit-log-system .audit-log-msg { color: var(--accent-cyan); }
+.audit-log-contract .audit-log-msg { color: var(--accent-blue); font-weight: bold; }
+.audit-log-phase .audit-log-msg { color: var(--text-muted); }
+.audit-log-finding .audit-log-msg { color: var(--accent-orange); }
+.audit-log-pass .audit-log-msg { color: var(--accent-green); }
+.audit-log-complete .audit-log-msg { color: var(--accent-green); font-weight: bold; }
+.audit-log-summary .audit-log-msg { color: var(--text-secondary); }
+.audit-log-divider .audit-log-msg { color: rgba(102, 126, 234, 0.3); }
+
+/* ─── Severity Filter Bar ─────────────────────────────────── */
+.audit-severity-bar {
+  display: flex;
+  gap: var(--space-sm);
+  margin-bottom: var(--space-lg);
+  flex-wrap: wrap;
+}
+
+.audit-sev-btn {
+  padding: 6px 14px;
+  border-radius: var(--radius-full);
+  border: 1px solid var(--glass-border);
+  background: rgba(10, 14, 39, 0.6);
+  color: var(--text-secondary);
+  font-size: var(--font-xs);
+  font-weight: var(--weight-medium);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  font-family: var(--font-family);
+}
+
+.audit-sev-btn:hover:not(:disabled) {
+  border-color: var(--sev-color, var(--accent-blue));
+  color: var(--sev-color, var(--accent-blue));
+}
+
+.audit-sev-btn-active {
+  border-color: var(--sev-color, var(--accent-blue)) !important;
+  background: color-mix(in srgb, var(--sev-color, var(--accent-blue)) 10%, transparent) !important;
+  color: var(--sev-color, var(--accent-blue)) !important;
+  font-weight: var(--weight-bold);
+}
+
+.audit-sev-btn:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+/* ─── Findings List ───────────────────────────────────────── */
+.audit-findings-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  margin-bottom: var(--space-xl);
+}
+
+.audit-finding {
+  background: var(--finding-bg);
+  border: 1px solid var(--finding-border);
+  border-radius: var(--radius-md);
+  transition: all var(--transition-base);
+  animation: findingSlideIn 0.3s ease;
+  overflow: hidden;
+}
+
+@keyframes findingSlideIn {
+  from { opacity: 0; transform: translateX(-8px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+.audit-finding:hover {
+  border-color: var(--finding-color);
+}
+
+.audit-finding-expanded {
+  border-color: var(--finding-color) !important;
+  box-shadow: 0 0 16px color-mix(in srgb, var(--finding-color) 15%, transparent);
+}
+
+.audit-finding-header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  padding: var(--space-md) var(--space-lg);
+  cursor: pointer;
+}
+
+.audit-finding-sev-badge {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: var(--radius-sm);
+  font-size: 10px;
+  font-weight: var(--weight-extrabold);
+  color: white;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  min-width: 65px;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.audit-finding-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.audit-finding-info h4 {
+  font-size: var(--font-sm);
+  font-weight: var(--weight-semibold);
+  color: var(--text-primary);
+  margin-bottom: 4px;
+  line-height: 1.4;
+}
+
+.audit-finding-meta {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  font-size: var(--font-xs);
+}
+
+.audit-finding-meta code {
+  background: rgba(102, 126, 234, 0.1);
+  padding: 1px 6px;
+  border-radius: 3px;
+  color: var(--accent-cyan);
+  font-size: 11px;
+}
+
+.audit-finding-expand {
+  color: var(--text-muted);
+  font-size: var(--font-xs);
+  flex-shrink: 0;
+  transition: transform var(--transition-fast);
+}
+
+.audit-finding-expanded .audit-finding-expand {
+  color: var(--finding-color);
+}
+
+/* ─── Finding Body (Expanded) ─────────────────────────────── */
+.audit-finding-body {
+  padding: 0 var(--space-lg) var(--space-lg);
+  border-top: 1px solid var(--finding-border);
+  animation: expandBody 0.3s ease;
+}
+
+@keyframes expandBody {
+  from { opacity: 0; max-height: 0; }
+  to { opacity: 1; max-height: 800px; }
+}
+
+.audit-finding-section {
+  margin-top: var(--space-md);
+}
+
+.audit-finding-section h5 {
+  font-size: var(--font-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-muted);
+  margin-bottom: var(--space-sm);
+  font-weight: var(--weight-semibold);
+}
+
+.audit-finding-section p {
+  font-size: var(--font-sm);
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+.audit-finding-category {
+  display: inline-block;
+  padding: 3px 10px;
+  background: rgba(102, 126, 234, 0.1);
+  border: 1px solid rgba(102, 126, 234, 0.15);
+  border-radius: var(--radius-sm);
+  font-size: var(--font-xs);
+  color: var(--accent-blue);
+  font-weight: var(--weight-medium);
+}
+
+.audit-fix-code {
+  background: rgba(5, 8, 22, 0.9);
+  border: 1px solid rgba(0, 184, 148, 0.15);
+  border-radius: var(--radius-md);
+  padding: var(--space-md) var(--space-lg);
+  overflow-x: auto;
+  font-family: 'Fira Code', 'Cascadia Code', 'Consolas', monospace;
+  font-size: 12px;
+  line-height: 1.7;
+  color: var(--accent-green);
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+/* ─── Idle State ──────────────────────────────────────────── */
+.audit-idle {
+  text-align: center;
+  padding: var(--space-3xl) var(--space-xl) !important;
+}
+
+.audit-idle-icon {
+  font-size: 56px;
+  margin-bottom: var(--space-lg);
+  opacity: 0.6;
+}
+
+.audit-idle h3 {
+  margin-bottom: var(--space-sm);
+}
+
+.audit-idle p {
+  max-width: 480px;
+  margin: 0 auto var(--space-xl);
+  line-height: 1.6;
+  font-size: var(--font-sm);
+}
+
+.audit-contracts-preview {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-sm);
+}
+
+.audit-contract-chip {
+  padding: 4px 12px;
+  background: rgba(102, 126, 234, 0.08);
+  border: 1px solid rgba(102, 126, 234, 0.15);
+  border-radius: var(--radius-full);
+  font-size: var(--font-xs);
+  color: var(--text-secondary);
+  font-family: monospace;
+}
+
+/* ─── Summary Card ────────────────────────────────────────── */
+.audit-summary {
+  padding: var(--space-xl) !important;
+}
+
+.audit-summary-grid {
+  display: flex;
+  gap: var(--space-md);
+}
+
+.audit-summary-item {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-xs);
+  padding: var(--space-md);
+  background: rgba(10, 14, 39, 0.4);
+  border: 1px solid;
+  border-radius: var(--radius-md);
+}
+
+.audit-summary-count {
+  font-size: var(--font-2xl);
+  font-weight: var(--weight-bold);
+}
+
+.audit-summary-label {
+  font-size: var(--font-xs);
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* ─── Responsive ──────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .audit-control-bar {
+    flex-direction: column;
+    gap: var(--space-lg);
+  }
+
+  .audit-finding-header {
+    flex-wrap: wrap;
+  }
+
+  .audit-finding-meta {
+    flex-wrap: wrap;
+  }
+
+  .audit-summary-grid {
+    flex-wrap: wrap;
+  }
+
+  .audit-summary-item {
+    min-width: 80px;
+  }
+
+  .audit-severity-bar {
+    overflow-x: auto;
+    flex-wrap: nowrap;
+    padding-bottom: var(--space-sm);
+  }
+
+  .audit-sev-btn {
+    white-space: nowrap;
+  }
+}

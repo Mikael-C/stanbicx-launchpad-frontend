@@ -1,0 +1,126 @@
+.project-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.project-header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+}
+
+.project-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--font-xl);
+  font-weight: var(--weight-extrabold);
+  color: white;
+  flex-shrink: 0;
+}
+
+.project-name {
+  font-size: var(--font-lg);
+  font-weight: var(--weight-bold);
+}
+
+.project-price {
+  display: flex;
+  justify-content: space-between;
+  font-size: var(--font-md);
+  font-weight: var(--weight-semibold);
+  padding: var(--space-sm) 0;
+}
+
+/* Vesting Schedule Badge */
+.vesting-schedule-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: var(--font-xs);
+  color: var(--text-secondary);
+  background: rgba(99, 102, 241, 0.08);
+  border: 1px solid rgba(99, 102, 241, 0.15);
+  border-radius: 999px;
+  padding: 5px 12px;
+  width: fit-content;
+}
+
+.vesting-schedule-icon {
+  font-size: 12px;
+}
+
+/* Vesting Card */
+.vesting-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.vesting-amount {
+  font-size: var(--font-2xl);
+  font-weight: var(--weight-extrabold);
+  color: var(--text-primary);
+}
+
+.vesting-usd-paid {
+  font-size: var(--font-sm);
+  margin-top: -8px;
+}
+
+.vesting-completed-label {
+  font-size: var(--font-sm);
+  color: var(--color-success);
+  text-align: center;
+  padding: var(--space-sm);
+  background: rgba(16, 185, 129, 0.08);
+  border-radius: var(--radius-sm);
+}
+
+/* Purchase Summary */
+.purchase-summary {
+  display: flex;
+  flex-direction: column;
+}
+
+.purchase-summary .mb-sm {
+  margin-bottom: var(--space-xs);
+}
+
+.purchase-divider {
+  height: 1px;
+  background: var(--border-glass);
+  margin: var(--space-sm) 0;
+}
+
+.purchase-vesting-note {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: var(--font-xs);
+  color: var(--text-muted);
+  padding: var(--space-sm);
+  background: rgba(99, 102, 241, 0.06);
+  border-radius: var(--radius-sm);
+  border: 1px solid rgba(99, 102, 241, 0.1);
+}
+
+/* Tab badge for purchase count */
+.tab-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 20px;
+  height: 20px;
+  padding: 0 6px;
+  border-radius: 999px;
+  background: var(--gradient-primary);
+  color: white;
+  font-size: 11px;
+  font-weight: var(--weight-bold);
+  margin-left: 6px;
+}

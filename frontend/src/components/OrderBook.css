@@ -1,0 +1,65 @@
+.orderbook {
+  overflow: hidden;
+}
+
+.orderbook-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--space-lg);
+}
+
+.orderbook-header h4 {
+  font-size: var(--font-lg);
+  font-weight: var(--weight-bold);
+}
+
+.orderbook-meta {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+}
+
+.orderbook-count {
+  font-size: var(--font-xs);
+  color: var(--text-muted);
+}
+
+.orderbook-live {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: var(--font-xs);
+  color: var(--accent-green);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-weight: var(--weight-semibold);
+}
+
+.orderbook-seller {
+  display: flex;
+  align-items: center;
+  font-family: monospace;
+  font-size: var(--font-sm);
+}
+
+.orderbook-amount {
+  font-weight: var(--weight-semibold);
+}
+
+.orderbook-total {
+  font-weight: var(--weight-semibold);
+  color: var(--accent-green);
+}
+
+.orderbook-time {
+  font-size: var(--font-xs);
+}
+
+.orderbook-own-row {
+  background: rgba(99, 102, 241, 0.04);
+}
+
+.orderbook-loading {
+  padding: var(--space-md) 0;
+}

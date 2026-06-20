@@ -1,0 +1,40 @@
+.confirmation-dialog {
+  max-width: 480px;
+}
+
+.confirmation-danger-icon {
+  color: var(--accent-red);
+  margin-right: 8px;
+}
+
+.confirmation-message {
+  color: var(--text-primary);
+  font-size: var(--font-md);
+  line-height: 1.6;
+  margin-bottom: var(--space-md);
+}
+
+.confirmation-warning {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-sm);
+  padding: var(--space-md);
+  background: rgba(255, 107, 107, 0.08);
+  border: 1px solid rgba(255, 107, 107, 0.2);
+  border-radius: var(--radius-md);
+  color: var(--accent-red);
+  font-size: var(--font-sm);
+  margin-bottom: var(--space-md);
+}
+
+.confirmation-warning-icon {
+  flex-shrink: 0;
+  font-size: 18px;
+}
+
+.confirmation-check {
+  margin-top: var(--space-md);
+  padding: var(--space-md);
+  background: rgba(102, 126, 234, 0.05);
+  border-radius: var(--radius-sm);
+}

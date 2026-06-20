@@ -1,0 +1,577 @@
+/* ============================================
+   ADMIN PAGE STYLES
+   Governance Dashboard with Proposal Management
+   ============================================ */
+
+/* ─── Kill Switch ──────────────────────────────────────────── */
+.killswitch-control {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-xl) !important;
+}
+
+.killswitch-active {
+  background: rgba(255, 107, 107, 0.08) !important;
+  border-color: rgba(255, 107, 107, 0.3) !important;
+  animation: borderGlow 2s ease infinite;
+}
+
+.killswitch-toggle {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+}
+
+/* ─── Quick Links ──────────────────────────────────────────── */
+.admin-quick-link {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  padding: var(--space-lg) !important;
+  cursor: pointer;
+  border: 1px solid var(--glass-border);
+  background: var(--glass-bg);
+  text-align: left;
+  font-family: var(--font-family);
+  width: 100%;
+  transition: all var(--transition-base);
+}
+
+.admin-quick-link:hover {
+  border-color: var(--accent-blue);
+  box-shadow: var(--shadow-glow-blue);
+  transform: translateY(-2px);
+}
+
+.admin-quick-icon {
+  font-size: 32px;
+  flex-shrink: 0;
+}
+
+.admin-quick-link h4 {
+  color: var(--text-primary);
+  margin-bottom: 2px;
+}
+
+.admin-quick-link p {
+  font-size: var(--font-sm);
+}
+
+.admin-quick-arrow {
+  margin-left: auto;
+  font-size: var(--font-xl);
+  color: var(--text-muted);
+  transition: transform var(--transition-fast);
+}
+
+.admin-quick-link:hover .admin-quick-arrow {
+  transform: translateX(4px);
+  color: var(--accent-blue);
+}
+
+/* ─── Section Header Row ──────────────────────────────────── */
+.section-header-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--space-lg);
+}
+
+.section-header-row .section-title {
+  margin-bottom: 0;
+}
+
+/* ─── Demo Admin Switcher ─────────────────────────────────── */
+.demo-admin-switcher {
+  background: rgba(102, 126, 234, 0.06);
+  border: 1px solid rgba(102, 126, 234, 0.2);
+  border-radius: var(--radius-lg);
+  padding: var(--space-lg);
+  margin-bottom: var(--space-xl);
+  position: relative;
+  overflow: hidden;
+}
+
+.demo-admin-switcher::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--gradient-primary);
+}
+
+.demo-admin-switcher-header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  margin-bottom: var(--space-md);
+}
+
+.demo-mode-indicator {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--accent-green);
+  animation: pulse-dot 2s ease infinite;
+}
+
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(0, 184, 148, 0.6); }
+  50% { opacity: 0.8; box-shadow: 0 0 0 6px rgba(0, 184, 148, 0); }
+}
+
+.demo-mode-tag {
+  font-size: var(--font-xs);
+  font-weight: var(--weight-bold);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--accent-blue);
+  background: rgba(102, 126, 234, 0.15);
+  padding: 2px 8px;
+  border-radius: var(--radius-sm);
+}
+
+.demo-mode-subtitle {
+  font-size: var(--font-sm);
+  color: var(--text-secondary);
+}
+
+.demo-admin-buttons {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-md);
+}
+
+.demo-admin-btn {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: var(--space-md) var(--space-lg);
+  background: rgba(10, 14, 39, 0.6);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: all var(--transition-base);
+  font-family: var(--font-family);
+  text-align: left;
+  position: relative;
+}
+
+.demo-admin-btn:hover {
+  border-color: var(--admin-color, var(--accent-blue));
+  background: rgba(10, 14, 39, 0.8);
+  transform: translateY(-1px);
+}
+
+.demo-admin-btn-active {
+  border-color: var(--admin-color, var(--accent-blue)) !important;
+  background: rgba(10, 14, 39, 0.9) !important;
+  box-shadow: 0 0 16px color-mix(in srgb, var(--admin-color) 30%, transparent);
+}
+
+.demo-admin-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--admin-color, var(--text-muted));
+  flex-shrink: 0;
+  transition: box-shadow var(--transition-base);
+}
+
+.demo-admin-btn-active .demo-admin-dot {
+  box-shadow: 0 0 8px var(--admin-color);
+  animation: pulse-dot 2s ease infinite;
+}
+
+.demo-admin-info {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.demo-admin-name {
+  font-size: var(--font-sm);
+  font-weight: var(--weight-semibold);
+  color: var(--text-primary);
+}
+
+.demo-admin-addr {
+  font-size: var(--font-xs);
+  color: var(--text-muted);
+  font-family: monospace;
+}
+
+.demo-admin-active-badge {
+  font-size: 9px;
+  font-weight: var(--weight-bold);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--accent-green);
+  background: rgba(0, 184, 148, 0.15);
+  padding: 2px 6px;
+  border-radius: var(--radius-sm);
+  margin-left: auto;
+  flex-shrink: 0;
+}
+
+.demo-wallet-display {
+  font-size: var(--font-sm);
+  color: var(--text-muted);
+}
+
+.demo-wallet-display code {
+  background: rgba(102, 126, 234, 0.12);
+  padding: 2px 6px;
+  border-radius: var(--radius-sm);
+  font-size: var(--font-xs);
+  color: var(--accent-blue);
+}
+
+/* ─── Create Proposal Card ────────────────────────────────── */
+.create-proposal-card {
+  padding: var(--space-xl) !important;
+  animation: slideDown 0.3s ease;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-12px);
+    max-height: 0;
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    max-height: 800px;
+  }
+}
+
+.create-proposal-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-lg);
+  margin-bottom: var(--space-lg);
+}
+
+.current-fee-display {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  padding: 12px 16px;
+  background: rgba(102, 126, 234, 0.08);
+  border: 1px solid rgba(102, 126, 234, 0.15);
+  border-radius: var(--radius-md);
+  height: 48px;
+}
+
+.current-fee-bps {
+  font-weight: var(--weight-semibold);
+  color: var(--text-primary);
+  font-family: monospace;
+}
+
+.current-fee-percent {
+  color: var(--accent-blue);
+  font-weight: var(--weight-bold);
+  font-size: var(--font-lg);
+  margin-left: auto;
+}
+
+/* ─── Fee Change Preview ──────────────────────────────────── */
+.fee-change-preview {
+  margin-bottom: var(--space-lg);
+  padding: var(--space-lg);
+  background: rgba(10, 14, 39, 0.5);
+  border: 1px dashed rgba(102, 126, 234, 0.2);
+  border-radius: var(--radius-md);
+}
+
+.fee-change-arrow-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-xl);
+}
+
+.fee-change-from,
+.fee-change-to {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-xs);
+  padding: var(--space-md) var(--space-xl);
+  background: rgba(102, 126, 234, 0.06);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-md);
+  min-width: 120px;
+}
+
+.fee-change-label {
+  font-size: var(--font-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-muted);
+  font-weight: var(--weight-medium);
+}
+
+.fee-change-value {
+  font-size: var(--font-2xl);
+  font-weight: var(--weight-bold);
+  color: var(--text-primary);
+}
+
+.fee-change-bps {
+  font-size: var(--font-xs);
+  color: var(--text-secondary);
+  font-family: monospace;
+}
+
+.fee-change-arrow {
+  font-size: var(--font-3xl);
+  color: var(--accent-blue);
+  animation: arrowPulse 1.5s ease infinite;
+  flex-shrink: 0;
+}
+
+@keyframes arrowPulse {
+  0%, 100% { opacity: 0.6; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.15); }
+}
+
+.fee-decrease {
+  border-color: rgba(0, 184, 148, 0.3) !important;
+  background: rgba(0, 184, 148, 0.06) !important;
+}
+
+.fee-decrease .fee-change-value {
+  color: var(--accent-green);
+}
+
+.fee-increase {
+  border-color: rgba(255, 107, 107, 0.3) !important;
+  background: rgba(255, 107, 107, 0.06) !important;
+}
+
+.fee-increase .fee-change-value {
+  color: var(--accent-red);
+}
+
+.create-proposal-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+}
+
+.create-proposal-actions .form-hint {
+  margin-left: var(--space-sm);
+}
+
+/* ─── Proposals List ──────────────────────────────────────── */
+.proposals-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.proposal-card {
+  padding: var(--space-xl) !important;
+  transition: all var(--transition-base);
+}
+
+.proposal-executed {
+  border-color: rgba(0, 184, 148, 0.2) !important;
+  background: rgba(0, 184, 148, 0.04) !important;
+}
+
+.proposal-cancelled {
+  opacity: 0.6;
+  border-color: rgba(255, 107, 107, 0.15) !important;
+}
+
+.proposal-header {
+  margin-bottom: var(--space-md);
+}
+
+.proposal-title-row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--space-md);
+  margin-bottom: var(--space-sm);
+}
+
+.proposal-title-row h4 {
+  font-size: var(--font-md);
+  font-weight: var(--weight-semibold);
+  line-height: 1.4;
+}
+
+.proposal-calldata {
+  display: inline-block;
+  font-size: var(--font-xs);
+  font-family: monospace;
+  background: rgba(10, 14, 39, 0.6);
+  padding: 4px 10px;
+  border-radius: var(--radius-sm);
+  color: var(--accent-cyan);
+  border: 1px solid rgba(0, 210, 255, 0.1);
+}
+
+/* ─── Approval Progress ───────────────────────────────────── */
+.approval-progress {
+  margin-bottom: var(--space-lg);
+}
+
+.approval-bar {
+  width: 100%;
+  height: 6px;
+  background: rgba(102, 126, 234, 0.1);
+  border-radius: var(--radius-full);
+  overflow: hidden;
+  margin-bottom: var(--space-md);
+}
+
+.approval-bar-fill {
+  height: 100%;
+  background: var(--gradient-primary);
+  border-radius: var(--radius-full);
+  transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.approval-bar-executed {
+  background: var(--gradient-success) !important;
+}
+
+.approval-dots {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--space-sm);
+}
+
+.approval-dot {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: 6px 12px;
+  border-radius: var(--radius-sm);
+  background: rgba(10, 14, 39, 0.4);
+  border: 1px solid var(--glass-border);
+  flex: 1;
+  transition: all var(--transition-base);
+}
+
+.approval-dot-approved {
+  border-color: var(--dot-color, var(--accent-green)) !important;
+  background: color-mix(in srgb, var(--dot-color, var(--accent-green)) 8%, transparent) !important;
+}
+
+.approval-dot-icon {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--font-xs);
+  font-weight: var(--weight-bold);
+  background: rgba(102, 126, 234, 0.15);
+  color: var(--text-muted);
+  flex-shrink: 0;
+  transition: all var(--transition-base);
+}
+
+.approval-dot-approved .approval-dot-icon {
+  background: var(--dot-color, var(--accent-green));
+  color: white;
+  box-shadow: 0 0 8px color-mix(in srgb, var(--dot-color, var(--accent-green)) 50%, transparent);
+}
+
+.approval-dot-label {
+  font-size: var(--font-xs);
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+
+.approval-dot-approved .approval-dot-label {
+  color: var(--text-secondary);
+}
+
+/* ─── Proposal Actions ────────────────────────────────────── */
+.proposal-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  margin-bottom: var(--space-md);
+}
+
+.already-approved-badge {
+  font-size: var(--font-sm);
+  color: var(--accent-green);
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+  padding: 6px 12px;
+  background: rgba(0, 184, 148, 0.08);
+  border-radius: var(--radius-sm);
+  border: 1px solid rgba(0, 184, 148, 0.2);
+}
+
+.proposal-executed-info {
+  margin-bottom: var(--space-sm);
+}
+
+.proposal-meta {
+  display: flex;
+  justify-content: space-between;
+  font-size: var(--font-xs);
+  padding-top: var(--space-sm);
+  border-top: 1px solid rgba(102, 126, 234, 0.08);
+}
+
+/* ─── Responsive ──────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .killswitch-control {
+    flex-direction: column;
+    gap: var(--space-md);
+    text-align: center;
+  }
+
+  .demo-admin-buttons {
+    grid-template-columns: 1fr;
+  }
+
+  .create-proposal-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .fee-change-arrow-container {
+    flex-direction: column;
+    gap: var(--space-md);
+  }
+
+  .fee-change-arrow {
+    transform: rotate(90deg);
+  }
+
+  .approval-dots {
+    flex-direction: column;
+  }
+
+  .proposal-title-row {
+    flex-direction: column;
+  }
+
+  .section-header-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-sm);
+  }
+
+  .proposal-meta {
+    flex-direction: column;
+    gap: var(--space-xs);
+  }
+}

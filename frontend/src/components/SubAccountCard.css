@@ -1,0 +1,60 @@
+.subaccount-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.subaccount-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.subaccount-apy {
+  font-size: var(--font-sm);
+  font-weight: var(--weight-semibold);
+  color: var(--accent-green);
+}
+
+.subaccount-balances {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-md);
+}
+
+.subaccount-balance {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.subaccount-balance-label {
+  font-size: var(--font-xs);
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.subaccount-balance-value {
+  font-size: var(--font-xl);
+  font-weight: var(--weight-bold);
+  color: var(--text-primary);
+}
+
+.subaccount-yield {
+  color: var(--accent-green);
+}
+
+.subaccount-dates {
+  display: flex;
+  justify-content: space-between;
+  padding-top: var(--space-sm);
+  border-top: 1px solid var(--glass-border);
+}
+
+.subaccount-date {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  font-size: var(--font-sm);
+}

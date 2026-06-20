@@ -1,0 +1,219 @@
+.dashboard-balance-section {
+  padding: var(--space-xl);
+}
+
+.dashboard-total-balance {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: var(--space-lg);
+}
+
+.dashboard-balance-label {
+  font-size: var(--font-sm);
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.dashboard-balance-value {
+  font-size: var(--font-3xl, 2.5rem);
+  font-weight: var(--weight-extrabold);
+  background: var(--gradient-primary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.dashboard-balance-split {
+  display: flex;
+  gap: var(--space-lg);
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.dashboard-balance-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.dashboard-split-value {
+  font-size: var(--font-lg);
+  font-weight: var(--weight-bold);
+}
+
+.dashboard-sxp {
+  color: var(--color-warning);
+}
+
+.dashboard-form-section {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: var(--space-xl);
+}
+
+.deposit-preview {
+  padding: var(--space-md) !important;
+}
+
+/* Token Holdings Section */
+.dashboard-token-holdings {
+  padding: var(--space-xl);
+}
+
+.token-holdings-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: var(--space-md);
+}
+
+.token-holding-item {
+  background: var(--bg-glass);
+  border: 1px solid var(--border-glass);
+  border-radius: var(--radius-md);
+  padding: var(--space-md);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+}
+
+.token-holding-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.token-holding-symbol {
+  font-size: var(--font-lg);
+  font-weight: var(--weight-extrabold);
+  color: var(--color-primary);
+}
+
+.token-holding-amount {
+  font-size: var(--font-2xl);
+  font-weight: var(--weight-extrabold);
+  color: var(--text-primary);
+}
+
+.token-holding-project {
+  font-size: var(--font-xs);
+}
+
+/* Vesting Summary Section */
+.dashboard-vesting-summary {
+  padding: var(--space-xl);
+}
+
+.vesting-summary-grid {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.vesting-summary-item {
+  background: var(--bg-glass);
+  border: 1px solid var(--border-glass);
+  border-radius: var(--radius-md);
+  padding: var(--space-md);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.vesting-summary-name {
+  font-size: var(--font-sm);
+  font-weight: var(--weight-semibold);
+  color: var(--text-primary);
+}
+
+.vesting-summary-amount {
+  font-size: var(--font-md);
+  font-weight: var(--weight-bold);
+  color: var(--text-secondary);
+}
+
+@media (max-width: 768px) {
+  .dashboard-balance-section {
+    padding: var(--space-lg);
+  }
+
+  .dashboard-balance-split {
+    gap: var(--space-md);
+  }
+
+  .token-holdings-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .dashboard-balance-value {
+    font-size: var(--font-2xl);
+  }
+}
+
+/* ─── Platform Paused States ──────────────────────────────── */
+.platform-paused-warning {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-md);
+  padding: var(--space-md) var(--space-lg);
+  margin-bottom: var(--space-lg);
+  background: rgba(255, 107, 107, 0.06);
+  border: 1px solid rgba(255, 107, 107, 0.25);
+  border-radius: var(--radius-md);
+  animation: pauseWarningIn 0.4s ease;
+}
+
+@keyframes pauseWarningIn {
+  from { opacity: 0; transform: translateY(-4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.platform-paused-icon {
+  font-size: 20px;
+  flex-shrink: 0;
+  animation: pulse 1.5s infinite;
+}
+
+.platform-paused-warning strong {
+  color: var(--accent-red);
+  font-size: var(--font-sm);
+  display: block;
+  margin-bottom: 2px;
+}
+
+.platform-paused-warning p {
+  color: var(--text-muted);
+  font-size: var(--font-sm);
+  line-height: 1.4;
+  margin: 0;
+}
+
+.btn-paused {
+  background: rgba(255, 107, 107, 0.15) !important;
+  border-color: rgba(255, 107, 107, 0.3) !important;
+  color: var(--accent-red) !important;
+  cursor: not-allowed !important;
+  opacity: 0.85;
+}
+
+.btn-paused:hover {
+  transform: none !important;
+  box-shadow: none !important;
+}
+
+.deposit-btn-container {
+  position: relative;
+}
+
+.paused-tooltip {
+  display: block;
+  text-align: center;
+  font-size: var(--font-xs);
+  color: var(--accent-red);
+  margin-top: var(--space-sm);
+  animation: pauseWarningIn 0.3s ease;
+}

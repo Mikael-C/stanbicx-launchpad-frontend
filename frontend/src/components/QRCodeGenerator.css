@@ -1,0 +1,33 @@
+.qrcode-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-md);
+}
+
+.qrcode-container {
+  padding: var(--space-md);
+  background: var(--bg-primary);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--glass-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.qrcode-container canvas {
+  border-radius: var(--radius-sm);
+}
+
+.qrcode-link {
+  display: flex;
+  gap: var(--space-sm);
+  width: 100%;
+  max-width: 400px;
+}
+
+.qrcode-input {
+  font-size: var(--font-xs) !important;
+  font-family: monospace;
+  flex: 1;
+}

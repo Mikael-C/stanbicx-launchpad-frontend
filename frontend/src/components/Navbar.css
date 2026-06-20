@@ -1,0 +1,212 @@
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: var(--z-sticky);
+  background: rgba(10, 14, 39, 0.8);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--glass-border);
+  transition: all var(--transition-base);
+}
+
+.navbar-scrolled {
+  background: rgba(10, 14, 39, 0.95);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+}
+
+.navbar-inner {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 var(--space-md);
+  height: 68px;
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  overflow: visible;
+}
+
+.navbar-logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+  flex-shrink: 0;
+}
+
+.logo-icon {
+  font-size: 22px;
+  background: var(--gradient-primary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  filter: drop-shadow(0 0 8px rgba(102, 126, 234, 0.4));
+}
+
+.logo-text {
+  font-size: var(--font-md);
+  font-weight: var(--weight-extrabold);
+  color: var(--text-primary);
+  letter-spacing: -0.02em;
+  white-space: nowrap;
+}
+
+.staging-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 9px;
+  font-weight: var(--weight-extrabold);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  background: linear-gradient(135deg, rgba(245, 158, 11, 0.2), rgba(234, 88, 12, 0.2));
+  color: #f59e0b;
+  border: 1px solid rgba(245, 158, 11, 0.3);
+  margin-left: 4px;
+  animation: pulse 2s infinite;
+  flex-shrink: 0;
+}
+
+/* Nav links container — scrollable, won't push wallet off */
+.navbar-links {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  flex: 1;
+  min-width: 0;
+  justify-content: center;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.navbar-links::-webkit-scrollbar {
+  display: none;
+}
+
+/* Compact nav links */
+.navbar-links .nav-link {
+  padding: 8px 10px;
+  font-size: 13px;
+  white-space: nowrap;
+  flex-shrink: 0;
+  gap: 4px;
+}
+
+.nav-link-icon {
+  font-size: 12px;
+  opacity: 0.7;
+}
+
+/* Wallet actions — NEVER get pushed off */
+.navbar-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  flex-shrink: 0;
+  position: relative;
+  z-index: calc(var(--z-sticky) + 1);
+}
+
+.hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 36px;
+  height: 36px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 6px;
+}
+
+.hamburger span {
+  display: block;
+  width: 100%;
+  height: 2px;
+  background: var(--text-secondary);
+  border-radius: 1px;
+  transition: all var(--transition-base);
+}
+
+.hamburger-open span:nth-child(1) {
+  transform: rotate(45deg) translate(5px, 5px);
+}
+
+.hamburger-open span:nth-child(2) {
+  opacity: 0;
+}
+
+.hamburger-open span:nth-child(3) {
+  transform: rotate(-45deg) translate(5px, -5px);
+}
+
+.mobile-backdrop {
+  display: none;
+}
+
+/* ── Responsive: Tablet ── */
+@media (max-width: 1200px) {
+  .navbar-links .nav-link {
+    padding: 8px 8px;
+    font-size: 12px;
+  }
+
+  .nav-link-icon {
+    display: none;
+  }
+}
+
+/* ── Responsive: Mobile ── */
+@media (max-width: 768px) {
+  .hamburger {
+    display: flex;
+  }
+
+  .navbar-links {
+    position: fixed;
+    top: 68px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: stretch;
+    background: rgba(10, 14, 39, 0.98);
+    backdrop-filter: blur(20px);
+    padding: var(--space-lg);
+    gap: var(--space-xs);
+    transform: translateX(-100%);
+    transition: transform var(--transition-base);
+    z-index: var(--z-dropdown);
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+
+  .navbar-links .nav-link {
+    padding: 14px 16px;
+    font-size: var(--font-md);
+  }
+
+  .navbar-links-open {
+    transform: translateX(0);
+  }
+
+  .mobile-backdrop {
+    display: block;
+    position: fixed;
+    inset: 0;
+    z-index: calc(var(--z-dropdown) - 1);
+  }
+
+  .nav-link-icon {
+    display: inline;
+    font-size: 14px;
+  }
+
+  .nav-link.active::after {
+    display: none;
+  }
+}

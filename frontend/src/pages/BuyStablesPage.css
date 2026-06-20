@@ -1,0 +1,143 @@
+.buy-stables-page {
+  padding-top: var(--space-xl);
+}
+
+.buy-form {
+  max-width: 520px;
+  margin: 0 auto;
+}
+
+.crypto-selector {
+  display: flex;
+  gap: var(--space-sm);
+}
+
+.crypto-option {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: var(--space-md);
+  background: var(--bg-input);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: all var(--transition-base);
+  font-family: var(--font-family);
+}
+
+.crypto-option:hover {
+  border-color: var(--glass-border-hover);
+}
+
+.crypto-option-active {
+  border-color: var(--accent-blue);
+  background: rgba(102, 126, 234, 0.1);
+  box-shadow: var(--shadow-glow-blue);
+}
+
+.crypto-icon {
+  font-size: 28px;
+}
+
+.crypto-name {
+  font-size: var(--font-sm);
+  font-weight: var(--weight-semibold);
+  color: var(--text-primary);
+}
+
+.crypto-symbol {
+  font-size: var(--font-xs);
+  color: var(--text-muted);
+}
+
+.amount-input-wrapper {
+  position: relative;
+}
+
+.amount-prefix {
+  position: absolute;
+  left: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-muted);
+  font-size: var(--font-lg);
+  font-weight: var(--weight-semibold);
+}
+
+.amount-input {
+  padding-left: 36px !important;
+  font-size: var(--font-xl) !important;
+  font-weight: var(--weight-semibold) !important;
+}
+
+.quote-display {
+  text-align: center;
+  padding: var(--space-xl) !important;
+  background: linear-gradient(135deg, rgba(0,184,148,0.08), rgba(0,210,255,0.08)) !important;
+  border-color: rgba(0, 184, 148, 0.2) !important;
+}
+
+.quote-label {
+  font-size: var(--font-sm);
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: var(--space-sm);
+}
+
+.quote-amount {
+  font-size: var(--font-3xl);
+  font-weight: var(--weight-extrabold);
+  color: var(--accent-green);
+}
+
+.quote-currency {
+  font-size: var(--font-lg);
+  margin-left: 8px;
+  color: var(--text-secondary);
+  font-weight: var(--weight-medium);
+}
+
+.buy-success {
+  max-width: 520px;
+  margin: 0 auto;
+  padding: var(--space-2xl) !important;
+}
+
+.buy-success-icon {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background: var(--gradient-success);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 32px;
+  color: white;
+  margin: 0 auto var(--space-lg);
+  animation: scaleIn 0.5s ease;
+  box-shadow: var(--shadow-glow-green);
+}
+
+.buy-success-details {
+  padding: var(--space-md) !important;
+  font-size: var(--font-sm);
+}
+
+.buy-success-amount {
+  font-weight: var(--weight-bold);
+  color: var(--accent-green);
+}
+
+.buy-success-hash {
+  font-family: monospace;
+  color: var(--accent-blue);
+}
+
+@media (max-width: 480px) {
+  .crypto-selector {
+    flex-direction: column;
+  }
+}
